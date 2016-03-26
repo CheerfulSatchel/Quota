@@ -1,0 +1,7 @@
+WORK FLOW:
+
+Page 1) Textbox + submit button, put id of person into textbox
+Page 2) Have a function to manually put purchases in (POST) 
+		See purchases made in list view
+		Set new budget, set time period 
+		Display user info and shiz

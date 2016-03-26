@@ -1,5 +1,7 @@
 <h1>Helloooo niqqa!</h1>
-<p1><button type="button" id="testButton" onclick="testFunction()">Click me niqqa</button></p1>
+<input type="submit" value="Submit">
+
+<button type="button" id="testButton" onclick="testFunction()">Click me niqqa</button>
 
 <script>
 function testFunction(){
@@ -8,10 +10,7 @@ function testFunction(){
 		    dataType: 'json',
 		    url: 'http://api.reimaginebanking.com/accounts?type=Credit%20Card&key=7c26b8201d6a14e230c59a421568e717',
 		    
-		    success: function(data){
-		        //alert("NIQQA WE MADE IT???");
-		        //results = jQuery.parseJSON(results.balance);
-		        //var json = $.parseJSON(results[0]);
+		    success: function(data){  
 		        alert(data[0].balance);
 		        console.log(data);
 
