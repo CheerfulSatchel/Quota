@@ -327,7 +327,7 @@ a:link, a:visited, a:hover, a:active {
 #keywords {
   margin: 0 auto;
   font-size: 1.0em;
-  margin-bottom: 30px;
+  margin-bottom: 120px;
 }
 
 
@@ -351,14 +351,6 @@ a:link, a:visited, a:hover, a:active {
 #keywords thead tr th.headerSortUp, #keywords thead tr th.headerSortDown {
   background: #acc8dd;
 }
-
-#keywords thead tr th.headerSortUp span {
-  background-image: url('http://i.imgur.com/SP99ZPJ.png');
-}
-#keywords thead tr th.headerSortDown span {
-  background-image: url('http://i.imgur.com/RkA9MBo.png');
-}
-
 
 #keywords tbody tr { 
   color: #000000;
