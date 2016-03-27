@@ -97,7 +97,7 @@ function print(){
     $.ajax({
             type: 'GET',
             dataType: 'json',
-            url: 'http://api.reimaginebanking.com/accounts?type=Credit%20Card&key=7c26b8201d6a14e230c59a421568e717',
+            url: 'http://api.reimaginebanking.com/accounts?type=Credit%20Card&key=297bc3401fca4bfdfbc9c45001ae3b3b',
             
             success: function(data){ 
                 balance = data[0].balance;
@@ -280,12 +280,12 @@ var purchased = 0;
 $.ajax({
             type: 'GET',
             dataType: 'json',
-            url: 'http://api.reimaginebanking.com/accounts/56c66be7a73e492741508170/purchases?key=7c26b8201d6a14e230c59a421568e717',
+            url: 'http://api.reimaginebanking.com/accounts/56c66be7a73e492741508168/purchases?key=297bc3401fca4bfdfbc9c45001ae3b3b',
             success: function(data1){ 
                 for(var i=0;i<data1.length;i++){
                     var obj = data1[i];
 
-                    var merchantLink = "http://api.reimaginebanking.com/merchants/" + obj.merchant_id + "?key=7c26b8201d6a14e230c59a421568e717"
+                    var merchantLink = "http://api.reimaginebanking.com/merchants/" + obj.merchant_id + "?key=297bc3401fca4bfdfbc9c45001ae3b3b"
                     $.ajax({
                                 type: 'GET',
                                 dataType: 'json',
@@ -377,7 +377,7 @@ $.ajax({
 
 <script>
         data = {
-    labels : ["January","February","March","April","May","June","July", "August", "September", "November", "December"],
+    labels : ["January","February","March","April","May","June","July", "August", "September", "October", "November", "December"],
     datasets : [
       {
         fillColor : "rgba(0,160,135,0.5)",
