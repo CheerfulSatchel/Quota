@@ -217,6 +217,7 @@ $.ajax({
                                     newCell.appendChild(newText);
                                     var newCell  = newRow.insertCell(4);
                                     var newText  = document.createTextNode(data1[tableRef.rows.length-1].amount);
+                                    //if it's within time frame add to purchased
                                     purchased = data1[tableRef.rows.length-1].amount + purchased;
                                     newCell.appendChild(newText);
                                     }
