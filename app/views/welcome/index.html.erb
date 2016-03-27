@@ -82,6 +82,7 @@ function print(){
     var endPeriodDate;
     var dateDiff = 0;
     var dateArr = [];
+    var amountArr = [];
 
     //var budget = 20000;
     $.ajax({
@@ -113,6 +114,7 @@ function print(){
         submittedTimePeriod = "";
         document.getElementById("budget-summary").innerHTML = "Currently no budget is set.";
         percent = 0.0;
+        purchased = 0;
         document.getElementById("budget-bar").setAttribute("data-percentage", percent);
         updatePercentBar();
         document.getElementById("budget-value").innerHTML = "";
@@ -158,9 +160,8 @@ function print(){
           return result;
         }
         
-        function formatDate(date){
-         
-         /*  var d = new Date(date),
+        /*function formatDate(date){
+           var d = new Date(date),
             month = '' + (d.getMonth() + 1),
            day = '' + d.getDate(),
           year = d.getFullYear();
@@ -168,17 +169,8 @@ function print(){
           if (month.length < 2) month = '0' + month;
           if (day.length < 2) day = '0' + day;
 
-          return [year, month, day].join('-');*/
-         /* var day = date.getDay();
-          var month = date.getMonth() + 1;
-          var year = date.getFullYear();
-          var formattedDate = year + "-" + month + "-" + day;
-          return formattedDate;*/
-          var formattedDate = date.toISOString().slice(0,10);
-          alert(formattedDate);
-          return formattedDate;
-
-        }
+          return [year, month, day].join('-');
+        }*/
         
         //var date1 = new Date();
         function getSubmission(){
@@ -190,7 +182,7 @@ function print(){
 
           var f = document.getElementById("timePeriod");
           submittedTimePeriod = f.options[f.selectedIndex].value;
-          alert("SubmittedTimePeriod: " + submittedTimePeriod);
+          //alert("SubmittedTimePeriod: " + submittedTimePeriod);
 
           var numDays = 0;
           if(submittedTimePeriod=="1 Day")
@@ -202,18 +194,21 @@ function print(){
 
           endPeriodDate = addDays(currentDate, numDays);
           
-          alert("ENDDD: " + endPeriodDate);
+          //alert("ENDDD: " + endPeriodDate);
 
-          formatDate(endPeriodDate);
-
-
-          //alert("FORMATTED: " + endPeriodDate).toISOString.slice(0,10);
-          alert("Length of dateARR: " + dateArr.length);
+          //formatDate(endPeriodDate);
+          //alert("THIS HOE: " + data1[tableRef.rows.length-1].amount );
+          //purchased = data1[tableRef.rows.length-1].amount + purchased;
+          //alert("FORMATTED: " + endPeriodDate);
+          //alert("Length of dateARR: " + dateArr.length);
          for(var i=0; i<dateArr.length; i++){
-            if(dateArr[i]<=endPeriodDate.toISOString.slice(0,10))
-              alert("YES");
-            else
-              alert("NO... " + "DATE ARR: " + dateArr[i] + ", " + endPeriodDate );
+            var newDateArr = addDays(dateArr[i],1);
+            if(newDateArr<=endPeriodDate && newDateArr >= currentDate) {
+              purchased += amountArr[i];
+              //alert("YES");
+            }
+            //else
+              //alert("NO... " + "DATE ARR: " + newDateArr + ", " + endPeriodDate );
          }
 
 
@@ -233,6 +228,7 @@ function print(){
         submitBtn.onclick = function(){
           modal.style.display="none";
           getSubmission();
+        purchased = 0;
         document.getElementById("budget-value").innerHTML = "$" + submittedAmount + " Budget";
         document.getElementById("budget-duration").innerHTML = submittedTimePeriod + " Remaining";
         }
@@ -285,8 +281,19 @@ $.ajax({
                                     //if(endPeriodDate)
                                     /*alert("NIQQA PLS: " + data1[tableRef.rows.length-1].purchase_date);
                                     alert("BONJOUR: " + (data1[tableRef.rows.length-1].purchase_date) < endPeriodDate);*/
-                                    dateArr.push(data1[tableRef.rows.length-1].purchase_date);
-                                    purchased = data1[tableRef.rows.length-1].amount + purchased;
+                                    dateArr.push(new Date(data1[tableRef.rows.length-1].purchase_date));
+                                    amountArr.push(data1[tableRef.rows.length-1].amount);
+                                    var newDate = new Date(data1[tableRef.rows.length-1].purchase_date);
+                                    var newDate = addDays(newDate,1);
+                                    console.log(newDate);
+                                    if(newDate<=endPeriodDate && newDate >= currentDate) {
+                                      purchased = purchased + data1[tableRef.rows.length-1].amount;
+                                      console.log(purchased);
+                                      //alert("YES");
+                                    }
+                                    //else
+                                      //alert("NO... " + "DATE ARR: " + newDateArr + ", " + endPeriodDate );
+                                    //purchased = data1[tableRef.rows.length-1].amount + purchased;
                                     newCell.appendChild(newText);
                                     }
                                 
