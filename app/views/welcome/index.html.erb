@@ -89,6 +89,8 @@ function print(){
     var dateDiff = 0;
     var dateArr = [];
     var amountArr = [];
+    var graphArr = [0,0,0,0,0,0,0,0,0,0,0,0];
+
 
     //var budget = 20000;
     $.ajax({
@@ -142,6 +144,8 @@ function print(){
             $('.bar-percentage[data-percentage]').each(function () {
                   var progress = $(this);
                   var percentage = Math.floor($(this).attr('data-percentage'));
+                  if(percentage >= 100)
+                    percentage = 0;
                   $({countNum: 100}).animate({countNum: percentage}, {
                     duration: 750,
                     easing:'linear',
@@ -196,7 +200,7 @@ function print(){
           submittedTimePeriod = f.options[f.selectedIndex].value;
           //alert("SubmittedTimePeriod: " + submittedTimePeriod);
 
-          alert("submittedTimeNumber: " + submittedTimeNumber);
+          //alert("submittedTimeNumber: " + submittedTimeNumber);
           var numDays = 0;
           if(submittedTimePeriod=="days")
             numDays = submittedTimeNumber * 1;
@@ -301,6 +305,10 @@ $.ajax({
                                     amountArr.push(data1[tableRef.rows.length-1].amount);
                                     var newDate = new Date(data1[tableRef.rows.length-1].purchase_date);
                                     var newDate = addDays(newDate,1);
+
+                                    graphArr[newDate.getMonth()] = graphArr[newDate.getMonth()] + data1[tableRef.rows.length-1].amount;
+                                    console.log(graphArr[newDate.getMonth()]);
+                                    myBarChart.datasets[0].bars[newDate.getMonth()].value = graphArr[newDate.getMonth()];
                                     //alert("NEWDATE: " + newDate);
                                     //alert("DA ENDPERIODDATE: " + endPeriodDate);
                                     if(newDate<=endPeriodDate && newDate >= currentDate) {
@@ -313,6 +321,8 @@ $.ajax({
                                       //alert("NO... " + "DATE ARR: " + newDateArr + ", " + endPeriodDate );
                                     //purchased = data1[tableRef.rows.length-1].amount + purchased;
                                     newCell.appendChild(newText);
+                                    console.log(graphArr);
+                                    myBarChart.update();
                                     }
                                 
                             });
@@ -341,5 +351,62 @@ $.ajax({
   </table>
  </div> 
 </section>
+
+<section class="some-related-articles">
+    <div id="wrapper">
+        <h1 id="graph-title"> Monthly Spending</h1>
+    <canvas id="myChart" ></canvas>
+    </div>
+</section>
+
+<script>
+        data = {
+    labels : ["January","February","March","April","May","June","July", "August", "September", "November", "December"],
+    datasets : [
+      {
+        fillColor : "rgba(0,160,135,0.5)",
+        strokeColor : "rgba(220,220,220,1)",
+        pointColor : "rgba(220,220,220,1)",
+        pointStrokeColor : "#fff",
+        data : graphArr
+      }
+    ]
+  }
+  options = {
+    //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+    scaleBeginAtZero : true,
+
+    //Boolean - Whether grid lines are shown across the chart
+    scaleShowGridLines : true,
+
+    //String - Colour of the grid lines
+    scaleGridLineColor : "rgba(0,0,0,.05)",
+
+    //Number - Width of the grid lines
+    scaleGridLineWidth : 1,
+
+    //Boolean - Whether to show horizontal lines (except X axis)
+    scaleShowHorizontalLines: true,
+
+    //Boolean - Whether to show vertical lines (except Y axis)
+    scaleShowVerticalLines: true,
+
+    //Boolean - If there is a stroke on each bar
+    barShowStroke : true,
+
+    //Number - Pixel width of the bar stroke
+    barStrokeWidth : 2,
+
+    //Number - Spacing between each of the X value sets
+    barValueSpacing : 5,
+
+    //Number - Spacing between data sets within X values
+    barDatasetSpacing : 1
+}
+
+var ctx = $("#myChart").get(0).getContext("2d");
+// This will get the first returned node in the jQuery collection.
+var myBarChart = new Chart(ctx).Bar(data, options);
+</script>
 
 </html>

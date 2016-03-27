@@ -157,7 +157,7 @@ a:link, a:visited, a:hover, a:active {
   background-size: cover;
  }
 .description, .some-related-articles {
-  width: 90%;
+  //width: 90%;
   max-width: 960px;
   margin: 0 auto;
 }
@@ -327,7 +327,7 @@ a:link, a:visited, a:hover, a:active {
 #keywords {
   margin: 0 auto;
   font-size: 1.0em;
-  margin-bottom: 120px;
+  margin-bottom: 60px;
 }
 
 
@@ -365,4 +365,8 @@ a:link, a:visited, a:hover, a:active {
 
 #budget-duration {
       float: right;
+}
+#myChart {
+  width: 100%;
+  margin-bottom:60px;
 }
