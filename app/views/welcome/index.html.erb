@@ -9,19 +9,13 @@
     <a id="username" class="sitename">Fixed Nav Bar</a>
     <!-- Example responsive navigation menu  -->
     <a class="show" href="#menu">Menu</a><a class="hide" href="#hidemenu">Menu</a>
-    <ul class="menu-items">
-      <li><a href="//sixrevisions.com">Home</a></li>
-      <li><a href="//sixrevisions.com/about/">About</a></li>
-      <li><a href="//sixrevisions.com/contact/">Contact</a></li>
-      <li><a href="//twitter.com/sixrevisions">Twitter</a></li>
-      <li><a href="//www.facebook.com/sixrevisions">Facebook</a></li>
-  </ul>
+    
   </div>
 </nav>
 
 <section class="content">
   <div class="description">
-    <h1>Fixed Navigation Bar</h1>
+    <h1>Quota</h1>
     <div id="bar-2" class="bar-main-container emerald">
     <div class="wrap">
       <div id="budget-bar" class="bar-percentage" data-percentage="62"></div>
@@ -44,8 +38,7 @@
   </div>
 
 
-  <div class="">
-    <input type="submit" onclick="print()" value="Submit">
+
 <script>
 function print(){
     console.log(balance);
@@ -62,7 +55,7 @@ function print(){
 
 
 <script>
-    var balance, id, type, nickname, rewards, account_num, cust_id;
+    var balance, id, type, nickname, rewards, account_num, cust_id, percent;
     var budget = 20000;
     $.ajax({
             type: 'GET',
@@ -78,7 +71,7 @@ function print(){
                 account_num = data[0].account_number;
                 cust_id = data[0].customer_id;
                 document.getElementById("username").innerHTML = nickname;
-                var percent = (balance)/(budget) * 100;
+                percent = (balance)/(budget) * 100;
                 document.getElementById("budget-bar").setAttribute("data-percentage", percent);
 
             }
@@ -121,8 +114,6 @@ function print(){
     </script>
   </div>
 </section>
-
-<button type="button" id="testButton">Click me niqqa</button>
 
 
 </html>
