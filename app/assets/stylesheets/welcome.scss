@@ -211,6 +211,7 @@ a:link, a:visited, a:hover, a:active {
 }
 .button:hover {
   background-color: rgba(255, 255, 255, 0.2);
+  cursor:pointer;
 }
 .button-dark:hover {
   color: #ffffff;
