@@ -1,23 +1,37 @@
-<h1>Helloooo niqqa!</h1>
-<input type="submit" value="Submit">
+<!doctype html>
+<html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, maximum-scale=1">
+<head>
+    <script src="javascripts/welcome.js" type="text/javascript"></script>
+</head>
+<nav class="fixed-nav-bar">
+  <div id="menu" class="menu">
+    <a class="sitename" href="fixed-navigation-bar.html">Fixed Nav Bar</a>
+    <!-- Example responsive navigation menu  -->
+    <a class="show" href="#menu">Menu</a><a class="hide" href="#hidemenu">Menu</a>
+    <ul class="menu-items">
+      <li><a href="//sixrevisions.com">Home</a></li>
+      <li><a href="//sixrevisions.com/about/">About</a></li>
+      <li><a href="//sixrevisions.com/contact/">Contact</a></li>
+      <li><a href="//twitter.com/sixrevisions">Twitter</a></li>
+      <li><a href="//www.facebook.com/sixrevisions">Facebook</a></li>
+  </ul>
+  </div>
+</nav>
 
-<button type="button" id="testButton" onclick="testFunction()">Click me niqqa</button>
+<section class="content">
+  <div class="description">
+    <h1>Fixed Navigation Bar</h1>
+    <p class="summary">A fixed-position (or "sticky") top navigation bar. Scroll this page to see the top navigation bar stay in place.</p>
+    <a class="button" href="//sixrevisions.com/css/fixed-navigation-bar/">Read the tutorial</a>
+    <a class="button" href="//github.com/sixrevisions/fixed-navigation-bar">View Source on GitHub</a>
+  </div>
+  <div class="">
+  </div>
+</section>
 
-<script>
-function testFunction(){
-		$.ajax({
-			type: 'GET',
-		    dataType: 'json',
-		    url: 'http://api.reimaginebanking.com/accounts?type=Credit%20Card&key=7c26b8201d6a14e230c59a421568e717',
-		    
-		    success: function(data){  
-		        alert(data[0].balance);
-		        console.log(data);
+<button type="button" id="testButton">Click me niqqa</button>
 
-		    }
-		});
-	}
-//$(document).ready(function() {
-	
-//});
-</script>
+
+</html>
