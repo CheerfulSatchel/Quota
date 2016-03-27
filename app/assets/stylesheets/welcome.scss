@@ -61,12 +61,6 @@ a.sitename, a:visited.sitename {
   background-position: center left;
   color: #dde1e2;
 }
-.show {
-  background-image: url(assets/down-arrow-icon.png);
-}
-.hide {
-  background-image: url(assets/up-arrow-icon.png);
-}
 
 @media only screen and (max-width: 800px) {
   .menu { 
@@ -157,7 +151,7 @@ a:link, a:visited, a:hover, a:active {
 
 .content {
   position: relative;
-  background: #464646 url(59H-from-gratisography.jpg) no-repeat center center fixed;
+  background: #000000 no-repeat center center fixed;
   background-size: cover;
  }
 .description, .some-related-articles {

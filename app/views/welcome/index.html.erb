@@ -3,11 +3,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, maximum-scale=1">
 <head>
-    <script src="javascripts/welcome.js" type="text/javascript"></script>
 </head>
 <nav class="fixed-nav-bar">
   <div id="menu" class="menu">
-    <a class="sitename" href="fixed-navigation-bar.html">Fixed Nav Bar</a>
+    <a id="username" class="sitename">Fixed Nav Bar</a>
     <!-- Example responsive navigation menu  -->
     <a class="show" href="#menu">Menu</a><a class="hide" href="#hidemenu">Menu</a>
     <ul class="menu-items">
@@ -24,10 +23,45 @@
   <div class="description">
     <h1>Fixed Navigation Bar</h1>
     <p class="summary">A fixed-position (or "sticky") top navigation bar. Scroll this page to see the top navigation bar stay in place.</p>
-    <a class="button" href="//sixrevisions.com/css/fixed-navigation-bar/">Read the tutorial</a>
-    <a class="button" href="//github.com/sixrevisions/fixed-navigation-bar">View Source on GitHub</a>
+    <a class="button" href="//sixrevisions.com/css/fixed-navigation-bar/">Set Budget</a>
+    <a class="button" href="//github.com/sixrevisions/fixed-navigation-bar">Clear Budget</a>
   </div>
   <div class="">
+    <input type="submit" onclick="print()" value="Submit">
+<script>
+function print(){
+    console.log(balance);
+    console.log(id);
+    console.log(type);
+    console.log(nickname);
+    console.log(rewards);
+    console.log(account_num);
+    console.log(cust_id);
+}
+</script>
+<button type="button" id="testButton" onclick="testFunction()">Click me niqqa</button>
+
+<script>
+    var balance, id, type, nickname, rewards, account_num, cust_id;
+    $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: 'http://api.reimaginebanking.com/accounts?type=Credit%20Card&key=7c26b8201d6a14e230c59a421568e717',
+            
+            success: function(data){ 
+                balance = data[0].balance;
+                id = data[0]._id;
+                type = data[0].type;
+                nickname = data[0].nickname;
+                rewards = data[0].rewards;
+                account_num = data[0].account_number;
+                cust_id = data[0].customer_id;
+                document.getElementById("username").innerHTML = nickname;
+
+            }
+        });
+    //console.log(balance);
+</script>
   </div>
 </section>
 
