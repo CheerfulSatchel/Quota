@@ -30,9 +30,20 @@
       </div>
     </div>
   </div>
-    <a class="button" href="//sixrevisions.com/css/fixed-navigation-bar/">Set Budget</a>
+
+   <a class="button" id="setButton">Set Budget</a>
+  <div id="budgetModal" class="modal">
+    <div class="modal-content">
+      <span class="close">X</span>
+      <p>Please set the budget.</p>
+      <a class="button">Submit</a>
+    </div>    
+  </div>
+
     <a class="button" href="//github.com/sixrevisions/fixed-navigation-bar">Clear Budget</a>
   </div>
+
+
   <div class="">
     <input type="submit" onclick="print()" value="Submit">
 <script>
@@ -46,8 +57,9 @@ function print(){
     console.log(cust_id);
     console.log(percent);
 }
+
 </script>
-<button type="button" id="testButton" onclick="testFunction()">Click me niqqa</button>
+
 
 <script>
     var balance, id, type, nickname, rewards, account_num, cust_id;
@@ -72,6 +84,22 @@ function print(){
             }
         });
 
+
+    var modal = document.getElementById('budgetModal');
+    var btn = document.getElementById('setButton'); 
+    var span = document.getElementsByClassName("close")[0];
+    btn.onclick = function(){
+      modal.style.display="block";
+    }
+    span.onclick = function(){
+      modal.style.display = "none";
+    }
+    window.onclick=function(event){
+      if(event.target == modal)
+        modal.style.display = "none;"
+
+    }
+
         $('.bar-percentage[data-percentage]').each(function () {
       var progress = $(this);
       var percentage = Math.ceil($(this).attr('data-percentage'));
@@ -89,7 +117,8 @@ function print(){
         progress.text(pct) && progress.siblings().children().css('width',pct);
         }
       });
-    });</script>
+    });
+    </script>
   </div>
 </section>
 
