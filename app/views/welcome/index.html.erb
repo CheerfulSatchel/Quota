@@ -22,7 +22,14 @@
 <section class="content">
   <div class="description">
     <h1>Fixed Navigation Bar</h1>
-    <p class="summary">A fixed-position (or "sticky") top navigation bar. Scroll this page to see the top navigation bar stay in place.</p>
+    <div id="bar-2" class="bar-main-container emerald">
+    <div class="wrap">
+      <div id="budget-bar" class="bar-percentage" data-percentage="62"></div>
+      <div class="bar-container">
+        <div class="bar"></div>
+      </div>
+    </div>
+  </div>
     <a class="button" href="//sixrevisions.com/css/fixed-navigation-bar/">Set Budget</a>
     <a class="button" href="//github.com/sixrevisions/fixed-navigation-bar">Clear Budget</a>
   </div>
@@ -37,12 +44,14 @@ function print(){
     console.log(rewards);
     console.log(account_num);
     console.log(cust_id);
+    console.log(percent);
 }
 </script>
 <button type="button" id="testButton" onclick="testFunction()">Click me niqqa</button>
 
 <script>
     var balance, id, type, nickname, rewards, account_num, cust_id;
+    var budget = 20000;
     $.ajax({
             type: 'GET',
             dataType: 'json',
@@ -57,11 +66,30 @@ function print(){
                 account_num = data[0].account_number;
                 cust_id = data[0].customer_id;
                 document.getElementById("username").innerHTML = nickname;
+                var percent = (balance)/(budget) * 100;
+                document.getElementById("budget-bar").setAttribute("data-percentage", percent);
 
             }
         });
-    //console.log(balance);
-</script>
+
+        $('.bar-percentage[data-percentage]').each(function () {
+      var progress = $(this);
+      var percentage = Math.ceil($(this).attr('data-percentage'));
+      $({countNum: 0}).animate({countNum: percentage}, {
+        duration: 750,
+        easing:'linear',
+        step: function() {
+          // What todo on every count
+        var pct = '';
+        if(percentage == 0){
+          pct = Math.floor(this.countNum) + '%';
+        }else{
+          pct = Math.floor(this.countNum+1) + '%';
+        }
+        progress.text(pct) && progress.siblings().children().css('width',pct);
+        }
+      });
+    });</script>
   </div>
 </section>
 
