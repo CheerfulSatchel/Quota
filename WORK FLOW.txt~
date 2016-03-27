@@ -5,5 +5,3 @@ Page 2) Have a function to manually put purchases in (POST)
 		See purchases made in list view
 		Set new budget, set time period 
 		Display user info and shiz
-
-Let users pick a recurring time period in the modal, which will be constantly recurring until it is reset later. 

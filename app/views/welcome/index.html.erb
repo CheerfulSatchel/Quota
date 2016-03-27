@@ -8,7 +8,7 @@
   <div id="menu" class="menu">
     <a id="username" class="sitename">Fixed Nav Bar</a>
     <!-- Example responsive navigation menu  -->
-    <a class="show" href="#menu">Menu</a><a class="hide" href="#hidemenu">Menu</a>
+   
     
   </div>
 </nav>
@@ -29,8 +29,27 @@
   <div id="budgetModal" class="modal">
     <div class="modal-content">
       <span class="close">X</span>
-      <p>Please set the budget.</p>
-      <a id="set-budget" class="button">Submit</a>
+        <p>Please set the budget and the time period.</p>
+      <div id="budgetValue">
+        <!--p>Please set the budget.</p-->
+        <div class="dropdown">
+          <p>$
+          <input type="text" placeholder="Amount" id="setAmount"></input>
+           <select id="timePeriod">
+            <option value="1 Day">1 Day</option>
+            <option value="2 Weeks">2 Weeks</option>
+            <option value="1 Month">1 Month</option>
+            </select> 
+          </p>
+        </div>
+      </div>
+
+  <div id="SubmitForm"> 
+          <a id="set-budget" class="button" onclick="getSubmission()">Submit</a>
+  </div>
+
+        
+
     </div>    
   </div>
 
@@ -44,6 +63,7 @@ function print(){
     console.log(balance);
     console.log(id);
     console.log(type);
+
     console.log(nickname);
     console.log(rewards);
     console.log(account_num);
@@ -55,7 +75,7 @@ function print(){
 
 
 <script>
-    var balance, id, type, nickname, rewards, account_num, cust_id, percent;
+    var balance, id, type, nickname, rewards, account_num, cust_id, percent, submittedAmount, submittedTimePeriod;
     var budget = 20000;
     $.ajax({
             type: 'GET',
@@ -90,8 +110,8 @@ function print(){
     window.onclick=function(event){
       if(event.target == modal)
         modal.style.display = "none;"
-
     }
+
 
         $('.bar-percentage[data-percentage]').each(function () {
       var progress = $(this);
@@ -111,6 +131,25 @@ function print(){
         }
       });
     });
+
+        function getSubmission(){
+          //MIGHT HAVE TO CHANGE ME LATER
+          var e = document.getElementById("setAmount");
+          submittedAmount = e.value;
+          //alert(submittedAmount);
+
+          var f = document.getElementById("timePeriod");
+          submittedTimePeriod = f.options[f.selectedIndex].value;
+
+          //alert("Your budget is set at $" + submittedAmount + " over the course of " + submittedTimePeriod + ".");
+        }
+        var submitBtn = document.getElementById('set-budget');
+        submitBtn.onclick = function(){
+          modal.style.display="none";
+          getSubmission();
+          alert("NIQQA: " + submittedAmount);
+        }
+
     </script>
   </div>
 </section>
