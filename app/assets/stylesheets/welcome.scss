@@ -16,6 +16,8 @@
    MUST have sufficient top margin or else it will be covered by the bar */
 .content {
   margin-top: 20px;
+  background-image: url("cityscape-12.jpg");
+
 }
 
 /* Example responsive navigation menu  */
@@ -151,7 +153,7 @@ a:link, a:visited, a:hover, a:active {
 
 .content {
   position: relative;
-  background: #000000 no-repeat center center fixed;
+  //background: #000000 no-repeat center center fixed;
   background-size: cover;
  }
 .description, .some-related-articles {
@@ -161,30 +163,20 @@ a:link, a:visited, a:hover, a:active {
 }
 .description {
   padding-top: 100px;
+  padding-bottom: 100px;
   min-height: 250px;
   text-align: center;
-}
-.some-related-articles {
-  color: #747474;
 }
 .some-related-articles h1 {
   color: #384e56;
   margin-top: 60px;
   text-transform: uppercase;
 }
-.some-related-articles h2 a:link, .some-related-articles h2 a:visited  {
-  color: #464646;
-  transition: color 0.1s ease;
-}
-.some-related-articles h2 a:hover {
-  color: #000000;
-  transition: color 0.3s ease;
-}
 /* SPECIAL */
 .summary {
   color: #d9dee2;
-  margin-top: 40px;
-  margin-bottom: 60px;
+  margin-top:   30px;
+  margin-bottom: -20px;
 }
 #set-budget {
   color: #FFFFFF !important;
@@ -335,7 +327,7 @@ a:link, a:visited, a:hover, a:active {
 #keywords {
   margin: 0 auto;
   font-size: 1.0em;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
 
@@ -345,6 +337,7 @@ a:link, a:visited, a:hover, a:active {
 }
 #keywords thead tr th { 
   font-weight: bold;
+  width:100%;
   padding: 12px 30px;
   padding-left: 42px;
 }
@@ -376,4 +369,8 @@ a:link, a:visited, a:hover, a:active {
 }
 #keywords tbody tr td.lalign {
   text-align: left;
+}
+
+#budget-duration {
+      float: right;
 }

@@ -8,7 +8,8 @@
   <div id="menu" class="menu">
     <a id="username" class="sitename">Fixed Nav Bar</a>
     <!-- Example responsive navigation menu  -->
-   
+    <a id="budget-value" class="budget-display"></a>
+    <a id="budget-duration" class="budget-display"></a>
     
   </div>
 </nav>
@@ -18,13 +19,14 @@
     <h1>Quota</h1>
     <div id="bar-2" class="bar-main-container emerald">
     <div class="wrap">
-      <div id="budget-bar" class="bar-percentage" data-percentage="62"></div>
+      <div id="budget-bar" class="bar-percentage"></div>
       <div class="bar-container">
         <div class="bar"></div>
       </div>
     </div>
-  </div>
 
+  </div>
+      <p id="budget-summary" class="summary">Currently no budget is set.</p>
    <a class="button" id="setButton">Set Budget</a>
   <div id="budgetModal" class="modal">
     <div class="modal-content">
@@ -48,12 +50,10 @@
           <a id="set-budget" class="button" onclick="getSubmission()">Submit</a>
   </div>
 
-        
-
     </div>    
   </div>
 
-    <a class="button">Clear Budget</a>
+    <a class="button" id="clearButton">Clear Budget</a>
   </div>
 
 
@@ -75,8 +75,10 @@ function print(){
 
 
 <script>
-    var balance, id, type, nickname, rewards, account_num, cust_id, percent, submittedAmount, submittedTimePeriod;
-    var budget = 20000;
+    var balance, id, type, nickname, rewards, account_num, cust_id, percent;
+    var submittedAmount = 0;
+    var submittedTimePeriod = "";
+    //var budget = 20000;
     $.ajax({
             type: 'GET',
             dataType: 'json',
@@ -91,15 +93,26 @@ function print(){
                 account_num = data[0].account_number;
                 cust_id = data[0].customer_id;
                 document.getElementById("username").innerHTML = nickname;
-                percent = (balance)/(budget) * 100;
-                document.getElementById("budget-bar").setAttribute("data-percentage", percent);
+                //percent = (purchased)/(submittedAmount) * 100;
+                //document.getElementById("budget-bar").setAttribute("data-percentage", percent);
 
             }
         });
 
     var modal = document.getElementById('budgetModal');
     var btn = document.getElementById('setButton'); 
+    var clr = document.getElementById('clearButton');
     var span = document.getElementsByClassName("close")[0];
+    clr.onclick = function() {
+        submittedAmount = 0;
+        submittedTimePeriod = "";
+        document.getElementById("budget-summary").innerHTML = "Currently no budget is set.";
+        percent = 0.0;
+        document.getElementById("budget-bar").setAttribute("data-percentage", percent);
+        updatePercentBar();
+        document.getElementById("budget-value").innerHTML = "";
+        document.getElementById("budget-duration").innerHTML = "";
+    }
     btn.onclick = function(){
       modal.style.display="block";
     }
@@ -111,25 +124,28 @@ function print(){
         modal.style.display = "none;"
     }
 
+        function updatePercentBar() {
+            $('.bar-percentage[data-percentage]').each(function () {
+                  var progress = $(this);
+                  var percentage = Math.ceil($(this).attr('data-percentage'));
+                  $({countNum: 0}).animate({countNum: percentage}, {
+                    duration: 750,
+                    easing:'linear',
+                    step: function() {
+                      // What todo on every count
+                    var pct = '';
+                    if(this.countNum != percentage && this.countNum > percentage){
+                      pct = Math.ceil(this.countNum) + '%';
+                    }else{
+                      pct = Math.ceil(this.countNum+1) + '%';
+                    }
+                    progress.text(pct) && progress.siblings().children().css('width',pct);
+                    }
+                  });
+                }); 
 
-        $('.bar-percentage[data-percentage]').each(function () {
-      var progress = $(this);
-      var percentage = Math.ceil($(this).attr('data-percentage'));
-      $({countNum: 0}).animate({countNum: percentage}, {
-        duration: 750,
-        easing:'linear',
-        step: function() {
-          // What todo on every count
-        var pct = '';
-        if(percentage == 0){
-          pct = Math.floor(this.countNum) + '%';
-        }else{
-          pct = Math.floor(this.countNum+1) + '%';
         }
-        progress.text(pct) && progress.siblings().children().css('width',pct);
-        }
-      });
-    });
+        
 
         function getSubmission(){
           //MIGHT HAVE TO CHANGE ME LATER
@@ -139,6 +155,12 @@ function print(){
 
           var f = document.getElementById("timePeriod");
           submittedTimePeriod = f.options[f.selectedIndex].value;
+            percent = (purchased)/(submittedAmount) * 100;
+            console.log(percent);
+            document.getElementById("budget-bar").setAttribute("data-percentage", percent);
+          document.getElementById("budget-summary").innerHTML = "Spent $" + purchased + " of $" + submittedAmount + ".";
+
+          updatePercentBar();
 
           //alert("Your budget is set at $" + submittedAmount + " over the course of " + submittedTimePeriod + ".");
         }
@@ -146,7 +168,11 @@ function print(){
         submitBtn.onclick = function(){
           modal.style.display="none";
           getSubmission();
-          alert("NIQQA: " + submittedAmount);
+        document.getElementById("budget-value").innerHTML = "$" + submittedAmount + " Budget";
+        document.getElementById("budget-duration").innerHTML = submittedTimePeriod + " Remaining";
+
+
+          //alert("NIQQA: " + submittedAmount);
         }
 
     </script>
@@ -154,6 +180,7 @@ function print(){
 </section>
 
 <script>
+var purchased = 0;
 $.ajax({
             type: 'GET',
             dataType: 'json',
@@ -190,6 +217,7 @@ $.ajax({
                                     newCell.appendChild(newText);
                                     var newCell  = newRow.insertCell(4);
                                     var newText  = document.createTextNode(data1[tableRef.rows.length-1].amount);
+                                    purchased = data1[tableRef.rows.length-1].amount + purchased;
                                     newCell.appendChild(newText);
                                     }
                                 
