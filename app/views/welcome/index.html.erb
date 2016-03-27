@@ -97,7 +97,6 @@ function print(){
             }
         });
 
-
     var modal = document.getElementById('budgetModal');
     var btn = document.getElementById('setButton'); 
     var span = document.getElementsByClassName("close")[0];
@@ -154,5 +153,71 @@ function print(){
   </div>
 </section>
 
+<script>
+$.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: 'http://api.reimaginebanking.com/accounts/56c66be7a73e492741508170/purchases?key=7c26b8201d6a14e230c59a421568e717',
+            success: function(data1){ 
+                for(var i=0;i<data1.length;i++){
+                    var obj = data1[i];
+
+                    var merchantLink = "http://api.reimaginebanking.com/merchants/" + obj.merchant_id + "?key=7c26b8201d6a14e230c59a421568e717"
+                    $.ajax({
+                                type: 'GET',
+                                dataType: 'json',
+                                url: merchantLink,
+                                success: function(data2){ 
+                                    var merchantName, merchantType;
+                                    var tableRef = document.getElementById('keywords').getElementsByTagName('tbody')[0];
+
+                                    // Insert a row in the table at the last row
+                                    var newRow   = tableRef.insertRow(tableRef.rows.length);
+                                    merchantName = data2.name;
+                                    merchantType = data2.category;
+                                    // Insert a cell in the row at index 0
+                                    var newCell  = newRow.insertCell(0);
+                                    var newText  = document.createTextNode(data1[tableRef.rows.length-1].description  );
+                                    newCell.appendChild(newText);
+                                    var newCell  = newRow.insertCell(1);
+                                    var newText  = document.createTextNode(merchantName);
+                                    newCell.appendChild(newText);
+                                    var newCell  = newRow.insertCell(2);
+                                    var newText  = document.createTextNode(merchantType);
+                                    newCell.appendChild(newText);
+                                    var newCell  = newRow.insertCell(3);
+                                    var newText  = document.createTextNode(data1[tableRef.rows.length-1].purchase_date);
+                                    newCell.appendChild(newText);
+                                    var newCell  = newRow.insertCell(4);
+                                    var newText  = document.createTextNode(data1[tableRef.rows.length-1].amount);
+                                    newCell.appendChild(newText);
+                                    }
+                                
+                            });
+
+                }
+            }
+        });
+</script>
+
+<section class="some-related-articles">
+  <div id="wrapper">
+  <h1>Purchases</h1>
+  
+  <table id="keywords" class="tablesorter" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr>
+        <th><span>Purchase</span></th>
+        <th><span>Merchant</span></th>
+        <th><span>Type</span></th>
+        <th><span>Date</span></th>
+        <th><span>Amount</span></th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+ </div> 
+</section>
 
 </html>
