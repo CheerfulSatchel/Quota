@@ -90,6 +90,7 @@ function print(){
     var dateArr = [];
     var amountArr = [];
     var graphArr = [0,0,0,0,0,0,0,0,0,0,0,0];
+    var percentage = 0;
 
 
     //var budget = 20000;
@@ -143,9 +144,17 @@ function print(){
         function updatePercentBar() {
             $('.bar-percentage[data-percentage]').each(function () {
                   var progress = $(this);
-                  var percentage = Math.floor($(this).attr('data-percentage'));
+                  percentage = Math.floor($(this).attr('data-percentage'));
                   if(percentage >= 100)
                     percentage = 0;
+
+
+                  /*if(percentage <= 25){
+
+                    <%=send_text_message%>
+                  }*/
+
+
                   $({countNum: 100}).animate({countNum: percentage}, {
                     duration: 750,
                     easing:'linear',
@@ -248,6 +257,11 @@ function print(){
         submitBtn.onclick = function(){
           modal.style.display="none";
           getSubmission();
+          if(percentage <= 25){
+
+                    <% send_text_message %>
+                    console.log("SENT MESG");
+                  }
         purchased = 0;
         document.getElementById("budget-value").innerHTML = "$" + submittedAmount + " Budget";
         document.getElementById("budget-duration").innerHTML = submittedTimeNumber + " " + submittedTimePeriod + " Remaining";

@@ -18,6 +18,8 @@ gem 'capital_one', '~>0.4.3'
 
 gem 'chart-js-rails'
 
+gem 'twilio-ruby'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
